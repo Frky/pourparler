@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>pourparler | website</title>
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'website/css/src/style.css' %}">
+
+    {% block more_style %}
+    {% endblock %}
+
+    <!-- <script src="{% static 'website/js/script.js' %}"></script> -->
+
+    {% block more_script %}
+    {% endblock %}
+</head>
+
+<body class="{% block bodyclass %}{% endblock %}">
+    <header>
+        {% if user.is_authenticated %}
+        {{ user.username }} | <a href="{% url 'logout' %}">logout</a> 
+        {% else %}
+            <a href="{% url 'login' %}">login</a> | 
+            <a href="{% url 'register' %}">register</a>
+        {% endif %}
+
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>
