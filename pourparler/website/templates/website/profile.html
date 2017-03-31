@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Profil de {{ locutor.user.username }}</h2>
+
+<h2>Éloquences</h2>
+
+<ul>
+{% for s in subjects %}
+    <li>({{ s.date }}) {{ s.text }}</li>
+{% endfor %}
+</ul>
+
+</p>
+
+<h2>Événements organisés par {{ locutor.user.username }}</h2>
+
+<ul>
+{% for e in events %}
+    <li><a href="{% url 'event' e.id %}">{{ e.event_date }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

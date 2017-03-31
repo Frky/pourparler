@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>e.date</p>
-    <p>e.time</p>
-    <p>e.place</p>
-    <p>e.remarks</p>
+<p>{{ e.event_date }}</p>
+<p>{{ e.event_time }}</p>
+<p>{{ e.event_place }}</p>
+<p>{{ e.description }}</p>
+<p>{{ e.creator.username }}</p>
 {% endblock %}

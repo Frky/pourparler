@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+
+from models import Locutor, Event, Subject
 
 def register(req):
     tpl = "website/register.html"
@@ -9,6 +11,7 @@ def register(req):
     form = UserCreationForm(req.POST or None)
     if form.is_valid():
         usr = form.save()
+        Locutor(user=usr).save()
         usr = authenticate(
                                 username=usr.username, 
                                 password=req.POST["password1"],
@@ -43,4 +46,14 @@ def p_login(req):
 def p_logout(req):
     logout(req)
     return redirect("index")
+
+def profile(req, uid):
+    tpl = "website/profile.html"
+    ctxt = dict()
+    locutor = get_object_or_404(Locutor, id=uid)
+    ctxt["locutor"] = locutor
+    ctxt["events"] = Event.objects.filter(creator=locutor)
+    ctxt["subjects"] = Subject.objects.filter(author=locutor)
+
+    return render(req, tpl, ctxt)
 
