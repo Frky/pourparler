@@ -7,13 +7,13 @@
 
 <table class="user-id uk-margin"><tr>
     <td class="user-name">
-        <a href="{% url 'profile' user.locutor.id %}">{{ user.username }}</a>
+        <a href="{% url 'profile' locutor.id %}">{{ locutor.user.username }}</a>
     </td>
     <td class="uk-icon-button user-pic">
-        {% if not user.locutor.pic %}
+        {% if not locutor.pic %}
             <span uk-icon="icon: user; ratio: 3"></span>
         {% else %}
-            <img src="{{ user.locutor.pic.url }}" />
+            <img src="{{ locutor.pic.url }}" />
         {% endif %}
     </td>
 </tr></table>
