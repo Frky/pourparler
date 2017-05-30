@@ -7,7 +7,7 @@
     <dt>Sujet proposé par</dt>
     <dd>{{ speech.subject.author.user.username }}</dd>
     <dt>Énoncé le</dt>
-    <dd>{{ speech.subject.event.event_date }}</dd>
+    <dd>{{ speech.subject.event.event_date }} (lien vers l'<a href="{% url 'event' speech.subject.event.id %}">événement</a>)</dd>
 </dl>
 
 {% if speech.text %}
