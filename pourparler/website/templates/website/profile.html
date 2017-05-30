@@ -36,7 +36,9 @@
         <div class="uk-accordion-content">
             <ul>
             {% for e in events %}
+            {% language 'fr' %}
                 <li><a href="{% url 'event' e.id %}">{{ e.event_date }}</a></li>
+            {% endlanguage %}
             {% endfor %}
             </ul>
         </div>

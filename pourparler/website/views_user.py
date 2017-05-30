@@ -61,7 +61,7 @@ def profile(req, uid):
     ctxt = dict()
     locutor = get_object_or_404(Locutor, id=uid)
     ctxt["locutor"] = locutor
-    ctxt["events"] = Event.objects.filter(creator=locutor)
+    ctxt["events"] = sorted(Event.objects.filter(creator=locutor), key=lambda e: e.event_date)
     ctxt["subjects"] = [s.subject for s in Speech.objects.filter(speaker=locutor)]
     return render(req, tpl, ctxt)
 
