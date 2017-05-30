@@ -1,3 +1,196 @@
-/* line 1, ../../scss/style.scss */
+@font-face {
+  font-family: "Hand of Sean";
+  src: url("../../fonts/Hand_Of_Sean.ttf");
+}
+@font-face {
+  font-family: "Typewriter";
+  src: url("../../fonts/TravelingTypewriter.ttf");
+}
+/* line 4, ../../scss/forms.scss */
+.uk-button {
+  background-color: white;
+  border-color: #16a085;
+  border-style: solid;
+  border-width: 1px;
+  color: #16a085;
+}
+/* line 11, ../../scss/forms.scss */
+.uk-button:hover {
+  background-color: #16a085;
+  color: white;
+}
+
+/* line 17, ../../scss/forms.scss */
+.uk-select:hover, .uk-select:focus,
+.uk-textarea:hover, .uk-textarea:focus,
+.uk-input:hover, .uk-input:focus {
+  border-color: #16a085;
+}
+
+/* line 23, ../../scss/forms.scss */
+.uk-form-required {
+  border-color: #16a085;
+}
+
+/* line 27, ../../scss/forms.scss */
+.event-date-select, .event-time-select {
+  width: 32%;
+}
+
+/* line 31, ../../scss/forms.scss */
+textarea.uk-textarea {
+  text-align: justify;
+  white-space: normal;
+}
+
+/* line 36, ../../scss/forms.scss */
+.uk-progress::-webkit-progress-value {
+  background-color: #16a085;
+}
+
+/* line 40, ../../scss/forms.scss */
+.uk-link {
+  color: #16a085;
+}
+
+/* line 6, ../../scss/style.scss */
+::selection {
+  background: #16a085;
+}
+
+/* line 10, ../../scss/style.scss */
+::-moz-selection {
+  background: #16a085;
+}
+
+/* line 14, ../../scss/style.scss */
 body {
+  background-color: white;
+  color: black;
+  width: 700px;
+  margin: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 22, ../../scss/style.scss */
+a {
+  text-decoration: none;
+  color: #16a085;
+}
+/* line 26, ../../scss/style.scss */
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+/* line 32, ../../scss/style.scss */
+header {
+  margin: 0px;
+  width: 100%;
+}
+
+/* line 37, ../../scss/style.scss */
+header nav {
+  width: 100%;
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* line 43, ../../scss/style.scss */
+header h1 {
+  margin-bottom: 50px;
+  margin-top: 60px;
+  font-size: 3em;
+  text-align: center;
+  font-family: "Hand of Sean";
+  font-weight: 300;
+}
+/* line 50, ../../scss/style.scss */
+header h1 a {
+  color: black;
+}
+/* line 54, ../../scss/style.scss */
+header h1 a:hover {
+  color: #16a085;
+}
+
+/* line 59, ../../scss/style.scss */
+section p {
+  margin: auto;
+  width: 100%;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+/* line 66, ../../scss/style.scss */
+.speech {
+  border-style: solid;
+  border-width: 0px 0px 0px 2px;
+  border-color: #16a085;
+  padding-left: 10px;
+  text-align: justify;
+  font-weight: 200;
+}
+
+/* line 76, ../../scss/style.scss */
+#create-link {
+  margin-top: 50px;
+  width: 100%;
+}
+/* line 79, ../../scss/style.scss */
+#create-link a {
+  width: 100%;
+}
+
+/* line 84, ../../scss/style.scss */
+.uk-alert {
+  text-align: justify;
+}
+
+/* line 89, ../../scss/style.scss */
+.uk-description-list dt {
+  color: #16a085;
+}
+/* line 92, ../../scss/style.scss */
+.uk-description-list dd {
+  font-size: 1.5em;
+}
+
+/* line 97, ../../scss/style.scss */
+.user-pic {
+  border-style: solid;
+  border-color: #16a085;
+  border-width: 1px;
+  cursor: pointer;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+}
+/* line 105, ../../scss/style.scss */
+.user-pic img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 112, ../../scss/style.scss */
+.user-id {
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+/* line 117, ../../scss/style.scss */
+.user-id .user-name {
+  width: 100%;
+  font-size: 2em;
+  color: #16a085;
+}
+/* line 122, ../../scss/style.scss */
+.user-id .user-pic {
+  padding: 0px;
+  width: 150px;
+  height: 150px;
+  margin-right: 0px;
+  border-width: 4px;
 }

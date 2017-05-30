@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ speech.subject.text }} - <a href="{% url 'profile' speech.speaker.id %}">{{ speech.speaker.user.username }}</a></h2>
+<dl class="uk-description-list">
+    <dt>Sujet proposé par</dt>
+    <dd>{{ speech.subject.author.user.username }}</dd>
+    <dt>Énoncé le</dt>
+    <dd>{{ speech.subject.event.event_date }}</dd>
+</dl>
+
+{% if speech.text %}
+    <div class="uk-margin">
+        {% if user == speech.speaker.user %}
+        <label class="uk-form-label">
+            <a href="{% url 'delete-speech' speech.id %}">
+                Supprimer mon discours
+            </a>
+        </label>
+        {% endif %}
+        <div class="speech">
+            {{ speech.text }}
+        </div>
+    </div>
+{% elif user == speech.speaker.user %}
+    <form class="uk-form-stacked" method="post" action="{% url 'speech' speech.id %}">
+        {% csrf_token %}
+        <div class="uk-margin">
+        <label class="uk-form-label">Texte de mon discours</label>
+        <div class="uk-form-controls">
+            <textarea class="uk-textarea" name="speech-text" cols=40 rows=15 placeholder="Françaises, français. 
+Il y a sept ans, le peuple français me confiait la destinée de notre pays. Cela a été un grand honneur, pour moi, de le diriger dans un monde difficile, dangereux, aux prises avec une crise économique, sociale et morale sans précédant depuis cinquante ans. Vous m’aviez donné en garde les biens les plus précieux de la collectivité nationale : la paix, la liberté, et nos institutions. J’en ai été le gardien, et à l’heure où je m’en vais, ils vous sont restitués intacts.
+Aujourd’hui, la volonté du plus grand nombre a choisi un nouveau président. J’ai voulu que la transition se fasse selon les règles de la continuité républicaine. C’est pourquoi j’accueillerai moi-même monsieur François Mitterrand à l’Elysée. Ceci apportera la preuve du respect des principes démocratiques et du fonctionnement régulier de nos institutions. Après-demain, je quitterai l’Elysée. Je viens ce soir vous dire très simplement : au-revoir.
+Je quitte mes fonctions en ayant conscience d’avoir apporter tous mes soins et tous mes efforts à ce que je jugeais essentiel. Je vous demande de vous souvenir de ceci : pendant ces sept ans, j’avais un rêve : que la France devienne une nation forte et paisible, fraternelle pour tous les siens, et traitant d’égal à égal avec les grands dirigeants du monde. Pendant sept ans, la France a vécu en paix, sans souffrir de secousses intérieures graves, ni politiques, ni sociales. Toutes les élections ont eu lieu à leurs dates normales. La France est restée le pays de toutes les libertés, le déroulement de l’élection présidentielle vient d’en apporter la preuve, elle fait même partie de ce qui n’est plus qu’un îlot de liberté dans un océan de contraintes. Chaque fois que nos forces ont eu à intervenir à l’extérieur, elles l’ont fait avec succès, cela restera mon honneur de l’avoir décider.
+Si notre pays n’a pas connu toute la prospérité que je voulais pour lui, nous avons maintenu pendant sept ans la solidité du franc, limité le déficit budgétaire, rétabli l’équilibre de la sécurité sociale, et sauvé ainsi nos régimes sociaux. Je voulais aussi que les Français soient fiers de la France. Je me suis donné beaucoup de peine pour cela en vous représentant à l’étranger. Chacun de vous, en franchissant nos frontières, pouvait être fier d’être français. Nous avons lancé de grands projets, notre programme d’indépendance énergétique poursuivi sans défaillance faisait l’admiration du monde. J’ai développé l’entente franco allemande, pour consolider l’Europe, j’ai maintenu ouvert le dialogue pour la paix.
+Je veux maintenant remercier chaleureusement toutes celles et tous ceux d’entre vous qui m’ont apporté leur suffrage, au nombre de quatorze millions six cents mille. Des suffrage populaires, courageux, modestes, des suffrages qui reconnaissaient l’effort accompli et  recherchaient le bien de la France. Merci à vous tous, qui de Valenciennes à Thionville, d’Alsace en Bretagne, des Antilles à la Réunion, de la Manche à la Lozère, de la Haute-Savoie au Var et à la Corse m’ont aidé dans ma tâche et m’ont apporté leur enthousiasme et leur dévouement. La France continuera à avoir besoin de vous, chaque fois qu’il le faudra, je saurai pouvoir compter sur vous. En ce jour qui marque pour beaucoup le terme de grandes espérances, je sais que vous êtes nombreux à partager mon émotion. Sachez qu’un événement politique n’est qu’un maillon dans la chaîne de notre longue histoire. A ceux qui m’ont suivi jusqu’au bout, je demande d’oublier les blessures du combat politique pour ne retenir que l’attachement aux grands idéaux qui restent les nôtres et la volonté de resserrer l’union chaque fois qu’elle est une condition du succès.
+Pour moi, je resterai attentif à tout ce qui concerne l’intérêt de la France. Tourné vers l’avenir et fort de l’expérience acquise, je ferai en sorte de me tenir à la disposition de mon pays pour défendre les principes et les idées qui ont guidé ma vie et inspiré mon action de sept ans. Avant de vous quitter, je vous souhaite bonne chance à chacune et à chacun d’entre vous. Oui, bonne chance du fond du cœur, sans amertume vis à vis des uns et avec une chaude reconnaissance pour les autres. Mes vœux vont aussi à celui que les français ont choisi pour être le premier d’entre eux. Et dans ces temps difficiles, où le mal rôde et frappe dans le monde, je souhaite que la Providence veille sur la France, pour son bonheur, pour son bien et pour sa grandeur. Au revoir."></textarea>
+        </div>
+        </div>
+        <input type="submit" class="uk-input uk-button" value="Envoyer mon discours" >
+    </form>
+{% else %}
+<div class="uk-alert">
+    Ce discours n'a pas (encore) été mis en ligne par son auteur. 
+</div>
+{% endif %}
+
+{% endblock %}

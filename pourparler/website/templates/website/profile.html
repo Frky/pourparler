@@ -1,25 +1,47 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 
-<h2>Profil de {{ locutor.user.username }}</h2>
 
-<h2>Éloquences</h2>
+<table class="user-id uk-margin"><tr>
+    <td class="user-name">
+        <a href="{% url 'profile' user.locutor.id %}">{{ user.username }}</a>
+    </td>
+    <td class="uk-icon-button user-pic">
+        {% if not user.locutor.pic %}
+            <span uk-icon="icon: user; ratio: 3"></span>
+        {% else %}
+            <img src="{{ user.locutor.pic.url }}" />
+        {% endif %}
+    </td>
+</tr></table>
 
-<ul>
-{% for s in subjects %}
-    <li>({{ s.date }}) {{ s.text }}</li>
-{% endfor %}
+<ul uk-accordion="multiple: true">
+    <li class="uk-open">
+        <h3 class="uk-accordion-title">Éloquences</h3>
+        <div class="uk-accordion-content">
+            <ul>
+            {% for s in subjects %}
+            {% language 'fr' %}
+                <li>({{ s.event.event_date }}) <a href="{% url 'speech' s.speech.id %}">{{ s.text }}</a></li>
+            {% endlanguage %}
+            {% endfor %}
+            </ul>
+        </div>
+    </li>
+    <li>
+        <h3 class="uk-accordion-title">Événements organisés</h3>
+        <div class="uk-accordion-content">
+            <ul>
+            {% for e in events %}
+                <li><a href="{% url 'event' e.id %}">{{ e.event_date }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </li>
 </ul>
 
-</p>
-
-<h2>Événements organisés par {{ locutor.user.username }}</h2>
-
-<ul>
-{% for e in events %}
-    <li><a href="{% url 'event' e.id %}">{{ e.event_date }}</a></li>
-{% endfor %}
-</ul>
 
 {% endblock %}

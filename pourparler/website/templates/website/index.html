@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p>Hello, world</p>
-    <p><a href="{% url 'create' %}">Create event</a></p>
+    <p class="speech"><strong>Décider</strong> d'un lieu et d'une date.
+    <strong>Inviter</strong> des participants éloquents, débutants, agaçants, intelligents. 
+    <strong>Proposer</strong> des sujets absurdes, déroutants, sérieux, 
+    pompeux, gênants.
+    <strong>Rédiger</strong> un discours prenant, entraînant, 
+    surprenant, amusant, instructif, poussif.
+    <strong>Énoncer</strong> son discours devant l'audience attentive, somnolente, ennuyée, interressée, bourrée.
+    <strong>Écouter</strong> les discours des autres participants, sans glousser, sans tousser, sans ronfler ni chahuter.
+    <br />
+    <br />
+    Bref, éloquer.
+    </p>
+
+    <p id="create-link"><a class="uk-button uk-button-default" href="{% url 'create' %}">Créer une éloquence</a></p>
+
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block more_script %}
+    <script src="{% static 'website/js/src/upload_pic.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<ul uk-accordion="multiple: true">
+    <li class="uk-open">
+        <h3 class="uk-accordion-title">Général</h3>
+        <div class="uk-accordion-content">
+			<div class="pic-upload uk-placeholder uk-text-center">
+			    <span uk-icon="icon: cloud-upload"></span>
+			    <span class="uk-text-middle">Uploader une nouvelle photo de profil (faire glisser ou cliquer</span>
+			    <div uk-form-custom>
+			        <input type="file">
+                    {% csrf_token %}
+			        <span class="uk-link">ici</span>
+			    </div>
+)
+			</div>
+			<progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+        </div>
+    </li>
+    <li>
+        <h3 class="uk-accordion-title">Notifications par email</h3>
+        <div class="uk-accordion-content">
+        </div>
+    </li>
+    <li>
+        <h3 class="uk-accordion-title">Protection des données</h3>
+        <div class="uk-accordion-content">
+        </div>
+    </li>
+</ul>
+
+{% endblock %}
+

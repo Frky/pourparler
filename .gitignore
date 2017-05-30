@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+.DS_Store
+
+*.sqlite3*
+
+*.swp
+pourparler/pourparler/settings/local.py

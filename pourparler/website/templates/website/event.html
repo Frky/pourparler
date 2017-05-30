@@ -1,9 +1,71 @@
 {% extends "base.html" %}
 
+{% block alert %}
+    {% if not e.reg_closed %}
+        {% if user.is_authenticated and user == e.creator.user %}
+            Votre événement a été créé. Partagez ce lien pour que les gens puissent s'inscrire et proposer des sujets.
+            <a href="{% url 'draw' e.id %}">Cliquez ici pour 
+            mettre fin aux inscriptions et attrtibuer aléatoirement les sujets.</a>
+        {% else %}
+            {% if my_subject %}
+            Vous êtes inscrit à cette soirée éloquence.
+            Un sujet à traiter vous sera bientôt attribué.
+            Vous avez proposé le sujet suivant : <i>{{ my_subject.text }}</i> <br>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        Le tirage a été effectué. Sujets et ordres de passage :
+        <ol>
+            {% for s in speechs %}
+            <li>{{ s.subject.text }} - <a href="{% url 'profile' s.speaker.id %}" class="a">{{ s.speaker.user.username }}</a></li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-<p>{{ e.event_date }}</p>
-<p>{{ e.event_time }}</p>
-<p>{{ e.event_place }}</p>
-<p>{{ e.description }}</p>
-<p>{{ e.creator.username }}</p>
+
+<dl class="uk-description-list">
+    <dt>Quand ça ?</dt>
+    <dd>Le {{ e.event_date }}</dd>
+
+    {% if e.event_time %}
+        <dt>À quelle heure ?</dt>
+        <dd>e.event_time</dd>
+    {% endif %}
+
+    {% if e.event_place %}
+        <dt>Où ça ?</dt>
+        <dd>{{ e.event_place }}</dd>
+    {% endif %}
+
+    {% if e.duration %}
+        <dt>Combien de temps ?</dt>
+        <dd>{{ e.duration }} minutes</dd>
+    {% endif %}
+
+    {% if e.description %}
+        <dt>Complément d'information</dt>
+        <dd>{{ e.description }}</dd>
+    {% endif %}
+
+    <dt>Nombre de participants inscrits</dt>
+    <dd>{{ nb_submitted }} (maximum: {{ e.nb_max }})</dd>
+
+    <dt>Éloquence proposée par</dt>
+    <dd><a href="{% url 'profile' user.locutor.id %}">{{ e.creator.user.username }}</a></dd>
+</dl>
+
+{% if not e.reg_closed and can_participate and not my_subject %}
+    
+    <hr>
+
+    <form action="{% url 'submit_subject' %}" method="post" class="uk-form-stacked">
+        {% csrf_token %} 
+        {{ subject_form.as_p }}
+        <input type="hidden" name="event" value="{{ e.id }}" />
+        <input class="uk-input uk-button" type="submit" value="S'inscrire"/>
+    </form>
+{% endif %}
+
 {% endblock %}

@@ -1,0 +1,42 @@
+
+@import "settings.scss";
+
+.uk-button {
+    background-color: white;
+    border-color: $color;
+	border-style: solid;
+	border-width: 1px;
+    color: $color;
+
+    &:hover {
+        background-color: $color;
+        color: white;
+    }
+}
+
+.uk-select:hover, .uk-select:focus, 
+.uk-textarea:hover, .uk-textarea:focus, 
+.uk-input:hover, .uk-input:focus {
+	border-color: $color;
+}
+
+.uk-form-required {
+    border-color: $color;
+}
+
+.event-date-select, .event-time-select {
+	width: 32%;
+}
+
+textarea.uk-textarea {
+    text-align: justify;
+    white-space: normal;
+}
+
+.uk-progress::-webkit-progress-value {
+    background-color: $color;
+}
+
+.uk-link {
+    color: $color;
+}

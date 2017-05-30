@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form id="event-form" action="{% url 'create' %}" method="post">
+    <form class="uk-form-stacked" id="event-form" action="{% url 'create' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="create" />
+		{% for field in form %}
+			<div class="uk-margin">
+			<label class="uk-form-label" for="{{ field.name }}">{{ field.label }}</label>
+			<div class="uk-form-controls">
+	        	{{ field }}
+			</div>
+			</div>
+		{% endfor %}
+        <input class="uk-input uk-button" type="submit" value="Créer l'événement" />
     </form>
 {% endblock %}

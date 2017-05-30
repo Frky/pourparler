@@ -2,9 +2,20 @@
 
 {% block content %}
 
-    <form id="login-form" action="login" method="post">
+    <form class="uk-form-stacked" id="login-form" action="login" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="register" />
+		<div class="uk-margin">
+			<label class="uk-form-label" for="username">Pseudonyme</label>
+			<div class="uk-form-controls">
+	        	<input id="id_username" name="username" maxlength=254 type="text" class="uk-input" required>
+			</div>
+		</div>
+		<div class="uk-margin">
+			<label class="uk-form-label" for="password">Mot de passe</label>
+			<div class="uk-form-controls">
+                <input id="id_password" name="password" type="password" class="uk-input" required="">
+			</div>
+		</div>
+        <input class="uk-input uk-button" type="submit" value="Se connecter" />
     </form>
 {% endblock %}

@@ -1,9 +1,18 @@
+
+from PIL import Image
+import os
+import string
+from random import choice
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.files.base import File
+from django.conf import settings
 
-from models import Locutor, Event, Subject
+from models import Locutor, Event, Subject, Speech
+from forms import ImageUploadForm
 
 def register(req):
     tpl = "website/register.html"
@@ -53,7 +62,31 @@ def profile(req, uid):
     locutor = get_object_or_404(Locutor, id=uid)
     ctxt["locutor"] = locutor
     ctxt["events"] = Event.objects.filter(creator=locutor)
-    ctxt["subjects"] = Subject.objects.filter(author=locutor)
-
+    ctxt["subjects"] = [s.subject for s in Speech.objects.filter(speaker=locutor)]
     return render(req, tpl, ctxt)
 
+def user_settings(req):
+    if not req.user.is_authenticated() or req.user.is_anonymous():
+        return redirect("index")
+    tpl = "website/settings.html"
+    ctxt = dict()
+
+    loc = req.user.locutor
+    if req.method == "POST":
+        random_pic_name = "".join([choice(string.ascii_letters) for i in xrange(32)])
+        if 'img' in req.FILES.keys():
+            req.FILES['img'].name = random_pic_name
+        picform = ImageUploadForm(req.POST, req.FILES)
+        if picform.is_valid():
+            # TODO delete old file
+#             with open(settings.MEDIA_ROOT + 'pic/' + loc.pic.name, 'wb+') as destination:
+#                 for chunk in loc.pic.chunks():
+#                    destination.write(chunk)
+            loc.pic.delete()
+            loc.pic = picform.cleaned_data["img"]
+            # File(random_pic_name, req.FILES['files[]'])
+            loc.save()
+            req.user.save()
+        else: 
+            print picform.errors
+    return render(req, tpl, ctxt)

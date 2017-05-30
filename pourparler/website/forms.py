@@ -6,46 +6,54 @@ from django import forms
 from django.forms import widgets 
 from django.forms.extras.widgets import SelectDateWidget
 
-from .models import Event
+from .models import Event, Subject
+from .widgets.select_time_widget import SelectTimeWidget
 
 months = {
-            1: 'jan.', 
-            2: 'fev.', 
+            1: 'janvier', 
+            2: 'fevrier', 
             3: 'mars', 
-            4: 'avr.',
+            4: 'avril',
             5: 'mai', 
             6: 'juin', 
-            7: 'jui.', 
+            7: 'juillet', 
             8: 'août',
-            9: 'sep.', 
-            10: 'oct.', 
-            11: 'nov.', 
-            12: 'dec.',
+            9: 'septembre', 
+            10: 'octobre', 
+            11: 'novembre', 
+            12: 'décembre',
         }
 
 class EventForm(forms.ModelForm):
 
     initials = {
                 "event_date": datetime.date.today(), 
-                "nb_max": 7
+				"nb_max": "",
+                "duration": "",
+				"event_time": datetime.time(20,00),
             }
 
     class Meta:
         model = Event
         fields = [
-                    "nb_max",
                     "event_date", 
                     "event_time", 
                     "event_place",
+                    "duration", 
+                    "nb_max",
                     "description", 
 
                     # Additional fields
-                    "participation",
-                    "diffusion",
+                    # "participation",
+                    # "diffusion",
                 ]
         widgets = {
-                    "event_date": SelectDateWidget(months=months), 
-                    "event_time": widgets.TimeInput(),
+                    "duration": widgets.NumberInput(attrs={"class": "uk-input", "placeholder": "cinq minutes, c'est pas mal"}),
+                    "nb_max": widgets.NumberInput(attrs={"class": "uk-input", "placeholder": "conseil : entre six et huit"}),
+                    "event_date": SelectDateWidget(months=months, attrs={"class": "uk-select event-date-select"}), 
+                    "event_time": SelectTimeWidget(twelve_hr=True, minute_step=5, attrs={"class": "uk-input event-time-select"}),
+                    "event_place": widgets.TextInput(attrs={"class": "uk-input", "placeholder": "une place publique, une agora, un charmant salon"}),
+                    "description": widgets.Textarea(attrs={"class": "uk-textarea"}),
                     "participation": widgets.Select(choices=(
                             (1, "Quiconque peut participer"), 
                             (2, "Sur invitation du créateur seulement"),
@@ -59,7 +67,8 @@ class EventForm(forms.ModelForm):
 
                 }
         labels = {
-                    "nb_max": "Combien de locuteurs (au plus) ?",
+                    "duration": "Quelle durée de discours (en minutes) ?",
+                    "nb_max": "Combien de locuteurs au maximum ?",
                     "event_date": "Quand ça ?",
                     "event_time": "À quelle heure ?",
                     "event_place": "Où donc ?",
@@ -78,3 +87,34 @@ class EventForm(forms.ModelForm):
             event.save()
         return event
 
+class SubjectForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Subject
+        fields = [
+                    "text", 
+                ]
+        widgets = {
+                    "text": forms.TextInput(attrs={
+                                "placeholder": "Proposition de sujet",
+                                "class": "uk-input",
+                                                    }),
+                }
+        labels = {
+                    "text": "",
+                }
+
+    def save(self, req=None, commit=True):
+        subject = super(SubjectForm, self).save(False)
+        if req is None:
+            return None
+        subject.author = req.user.locutor
+        subject.event = Event.objects.get(id=req.POST["event"])
+        if commit:
+            subject.save()
+        return subject
+
+
+class ImageUploadForm(forms.Form):
+    img = forms.ImageField()
