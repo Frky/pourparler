@@ -18,37 +18,40 @@
 .uk-button:hover {
   background-color: #16a085;
   color: white;
+  border-color: #16a085;
+  border-style: solid;
+  border-width: 1px;
 }
 
-/* line 17, ../../scss/forms.scss */
+/* line 20, ../../scss/forms.scss */
 .uk-select:hover, .uk-select:focus,
 .uk-textarea:hover, .uk-textarea:focus,
 .uk-input:hover, .uk-input:focus {
   border-color: #16a085;
 }
 
-/* line 23, ../../scss/forms.scss */
+/* line 26, ../../scss/forms.scss */
 .uk-form-required {
   border-color: #16a085;
 }
 
-/* line 27, ../../scss/forms.scss */
+/* line 30, ../../scss/forms.scss */
 .event-date-select, .event-time-select {
   width: 32%;
 }
 
-/* line 31, ../../scss/forms.scss */
+/* line 34, ../../scss/forms.scss */
 textarea.uk-textarea {
   text-align: justify;
   white-space: normal;
 }
 
-/* line 36, ../../scss/forms.scss */
+/* line 39, ../../scss/forms.scss */
 .uk-progress::-webkit-progress-value {
   background-color: #16a085;
 }
 
-/* line 40, ../../scss/forms.scss */
+/* line 43, ../../scss/forms.scss */
 .uk-link {
   color: #16a085;
 }

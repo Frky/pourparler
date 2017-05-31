@@ -63,6 +63,7 @@ def profile(req, uid):
     ctxt["locutor"] = locutor
     ctxt["events"] = sorted(Event.objects.filter(creator=locutor), key=lambda e: e.event_date)
     ctxt["subjects"] = sorted([s.subject for s in Speech.objects.filter(speaker=locutor)], key=lambda s: s.event.event_date)
+    ctxt["proposed_subjects"] = sorted(Subject.objects.filter(author=locutor), key=lambda s: s.event.event_date)
     return render(req, tpl, ctxt)
 
 def user_settings(req):

@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block content %}
 
 <h2>{{ speech.subject.text }} - <a href="{% url 'profile' speech.speaker.id %}">{{ speech.speaker.user.username }}</a></h2>
 <dl class="uk-description-list">
     <dt>Sujet proposé par</dt>
-    <dd>{{ speech.subject.author.user.username }}</dd>
+    <dd><a href="{% url 'profile' speech.subject.author.id %}">{{ speech.subject.author.user.username }}</a></dd>
     <dt>Énoncé le</dt>
+    {% language 'fr' %}
     <dd>{{ speech.subject.event.event_date }} (lien vers l'<a href="{% url 'event' speech.subject.event.id %}">événement</a>)</dd>
+    {% endlanguage %}
 </dl>
 
 {% if speech.text %}

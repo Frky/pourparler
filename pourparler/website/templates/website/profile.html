@@ -32,6 +32,18 @@
         </div>
     </li>
     <li>
+        <h3 class="uk-accordion-title">Sujets proposés</h3>
+        <div class="uk-accordion-content">
+            <ul>
+            {% for s in proposed_subjects %}
+            {% language 'fr' %}
+                <li>({{ s.event.event_date }}) {{ s.text }}</li>
+            {% endlanguage %}
+            {% endfor %}
+            </ul>
+        </div>
+    </li>
+    <li>
         <h3 class="uk-accordion-title">Événements organisés</h3>
         <div class="uk-accordion-content">
             <ul>

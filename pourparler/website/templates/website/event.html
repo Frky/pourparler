@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% block alert %}
     {% if not e.reg_closed %}
         {% if user.is_authenticated and user == e.creator.user %}
@@ -27,7 +29,9 @@
 
 <dl class="uk-description-list">
     <dt>Quand ça ?</dt>
+    {% language 'fr' %}
     <dd>Le {{ e.event_date }}</dd>
+    {% endlanguage %}
 
     {% if e.event_time %}
         <dt>À quelle heure ?</dt>
@@ -53,7 +57,7 @@
     <dd>{{ nb_submitted }} (maximum: {{ e.nb_max }})</dd>
 
     <dt>Éloquence proposée par</dt>
-    <dd><a href="{% url 'profile' user.locutor.id %}">{{ e.creator.user.username }}</a></dd>
+    <dd><a href="{% url 'profile' e.creator.user.locutor.id %}">{{ e.creator.user.username }}</a></dd>
 </dl>
 
 {% if not e.reg_closed and can_participate and not my_subject %}
