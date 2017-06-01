@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.shortcuts import render, redirect, HttpResponse
 
-from .views_user import register, p_login, p_logout, profile, user_settings 
+from .views_user import register, p_login, p_logout, profile, user_settings, p_change_pwd 
 from .models import Event, Subject, Speech
 from .forms import EventForm, SubjectForm
 from .draw import random_draw

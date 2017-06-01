@@ -1,11 +1,14 @@
+#-*- coding: utf-8 -*-
 
 from PIL import Image
 import os
 import string
 from random import choice
 
+from django.contrib import messages
+from django.contrib.auth.forms import PasswordChangeForm 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.files.base import File
@@ -71,7 +74,7 @@ def user_settings(req):
         return redirect("index")
     tpl = "website/settings.html"
     ctxt = dict()
-
+    ctxt["change_pwd_form"] = PasswordChangeForm(req.user)
     loc = req.user.locutor
     if req.method == "POST":
         random_pic_name = "".join([choice(string.ascii_letters) for i in xrange(32)])
@@ -91,3 +94,15 @@ def user_settings(req):
         else: 
             print picform.errors
     return render(req, tpl, ctxt)
+
+def p_change_pwd(req):
+    if req.method == 'POST':
+        form = PasswordChangeForm(req.user, req.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(req, user)
+            messages.success(req, 'Votre mot de passe a été modifié.')
+        else:
+            messages.error(req, 'Mot de passe inchangé (erreur).')
+    return redirect("settings")
+

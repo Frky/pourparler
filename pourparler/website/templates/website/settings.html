@@ -11,6 +11,7 @@
     <li class="uk-open">
         <h3 class="uk-accordion-title">Général</h3>
         <div class="uk-accordion-content">
+            <h5>Photo de profil</h5>
 			<div class="pic-upload uk-placeholder uk-text-center">
 			    <span uk-icon="icon: cloud-upload"></span>
 			    <span class="uk-text-middle">Uploader une nouvelle photo de profil (faire glisser ou cliquer</span>
@@ -22,6 +23,29 @@
 )
 			</div>
 			<progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+            <h5>Mot de passe</h5>
+            <form class="uk-form-stacked" action="{% url 'change_pwd' %}" method="post">
+                {% csrf_token %}
+		        <div class="uk-margin">
+		        	<label class="uk-form-label" for="old_password">Mot de passe actuel</label>
+		        	<div class="uk-form-controls uk-form-password">
+                        <input id="id_old_password" name="old_password" type="password" class="uk-input" required="">
+		        	</div>
+		        </div>
+		        <div class="uk-margin">
+		        	<label class="uk-form-label" for="new_password1">Nouveau mot de passe</label>
+		        	<div class="uk-form-controls uk-form-password">
+                        <input id="id_new_password1" name="new_password1" type="password" class="uk-input" required="">
+		        	</div>
+		        </div>
+		        <div class="uk-margin">
+		        	<label class="uk-form-label" for="new_password2">Nouveau mot de passe (confirmation)</label>
+		        	<div class="uk-form-controls">
+                        <input id="id_new_password2" name="new_password2" type="password" class="uk-input" required="">
+		        	</div>
+		        </div>
+                <input type="submit" class="uk-button uk-input" value="Changer mon mot de passe">
+            </form>
         </div>
     </li>
     <li>

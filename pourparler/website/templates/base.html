@@ -57,6 +57,9 @@
         <h1><a href="{% url 'index' %}">Éloquence.</a></h1>
     </header>
     <div class="uk-alert">
+        {% for m in messages %}
+            {{ m }}<br>
+        {% endfor %}
         {% block alert %}
         {% endblock %}
     </div>

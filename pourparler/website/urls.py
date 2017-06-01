@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^register$', website.views.register, name="register"),
     url(r'^login$', website.views.p_login, name="login"),
     url(r'^logout$', website.views.p_logout, name="logout"),
+    url(r'^changepwd$', website.views.p_change_pwd, name="change_pwd"),
 
     url(r'^loc/(?P<uid>[-A-Za-z0-9_]+)$', website.views.profile, name="profile"),
     url(r'^settings$', website.views.user_settings, name="settings"),
