@@ -71,7 +71,7 @@
             <input type="hidden" name="event" value="{{ e.id }}" />
             <input class="uk-input uk-button" type="submit" value="S'inscrire"/>
         </form>
-    {% else %}
+    {% elif not my_subject %}
         Pour participer à cet événement, <a href="{% url 'login' %}"> connectez-vous</a> ou <a href="{% url 'register' %}"> inscrivez-vous</a>.
     {% endif %}
 {% endif %}
