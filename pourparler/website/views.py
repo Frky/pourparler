@@ -46,12 +46,14 @@ def event(req, eid):
         ctxt["my_subject"] = None
     except MultipleObjectsReturned:
         ctxt["my_subject"] = None
+    except AttributeError:
+        ctxt["my_subject"] = None
     if event.reg_closed:
         subjects = Subject.objects.filter(event=event)
         ctxt["speechs"] = sorted([Speech.objects.get(subject=s) for s in subjects], key=lambda a: a.order)
     else:
         # For now, anyone with the link can register
-        ctxt["can_participate"] = not event.is_booked()
+        ctxt["can_participate"] = not event.is_booked() and req.user.is_authenticated() and not req.user.is_anonymous()
         ctxt["subject_form"] = SubjectForm()
     return render(req, tpl, ctxt)
 
