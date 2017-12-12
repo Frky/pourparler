@@ -15,7 +15,6 @@ RUN pip install -r eloquence/requirements.txt
 
 COPY ./ /app/
 WORKDIR /app
-RUN ls
 RUN compass compile
 
 WORKDIR /app
@@ -24,6 +23,6 @@ RUN ./manage.py collectstatic --noinput -c
 
 CMD uwsgi \
         --http :8000 \
-        --module eloquence.wsgi \
+        --module pourparler.wsgi \
         --socket eloquence.sock \
         --chmod-socket=776
