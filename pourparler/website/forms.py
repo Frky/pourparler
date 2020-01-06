@@ -118,3 +118,7 @@ class SubjectForm(forms.ModelForm):
 
 class ImageUploadForm(forms.Form):
     img = forms.ImageField()
+
+
+class AudioUploadForm(forms.Form):
+    audio = forms.FileField()

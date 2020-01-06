@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect, HttpResponse
 
 from .views_user import register, p_login, p_logout, profile, user_settings, p_change_pwd 
 from .models import Event, Subject, Speech
-from .forms import EventForm, SubjectForm
+from .forms import EventForm, SubjectForm, AudioUploadForm
 from .draw import random_draw
 
 
@@ -100,6 +100,11 @@ def speech(req, sid):
     if "speech-text" in req.POST and speech.speaker.user == req.user:
         speech.text = req.POST["speech-text"]
         speech.save()
+    if "audio" in req.FILES.keys():
+        audioform = AudioUploadForm(req.POST, req.FILES)
+        if audioform.is_valid():
+            speech.audio = audioform.cleaned_data['audio']
+            speech.save()
     ctxt["speech"] = speech 
     return render(req, tpl, ctxt)
 

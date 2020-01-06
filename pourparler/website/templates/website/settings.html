@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 {% block more_script %}
-    <script src="{% static 'website/js/src/upload_pic.js' %}"></script>
+    <script src="{% static 'website/js/src/file_upload.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -12,11 +12,11 @@
         <h3 class="uk-accordion-title">Général</h3>
         <div class="uk-accordion-content">
             <h5>Photo de profil</h5>
-			<div class="pic-upload uk-placeholder uk-text-center">
+			<div class="file-upload uk-placeholder uk-text-center">
 			    <span uk-icon="icon: cloud-upload"></span>
 			    <span class="uk-text-middle">Uploader une nouvelle photo de profil (faire glisser ou cliquer</span>
 			    <div uk-form-custom>
-			        <input type="file">
+			        <input name="img" target="/settings" type="file">
                     {% csrf_token %}
 			        <span class="uk-link">ici</span>
 			    </div>

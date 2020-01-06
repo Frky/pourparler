@@ -70,6 +70,8 @@ class Speech(RandomPrimaryIdModel):
     order = models.IntegerField(blank=False, null=False)
     # Text of the speech
     text = models.TextField(max_length=20000)
+    # PDF/File of the speech
+    # XXX
     # Audio recording of the speech
     audio = models.FileField(blank=True, null=True)
     # When the speech has been added
