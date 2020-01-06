@@ -33,7 +33,7 @@
                     {% if not user.locutor.pic %}
                         <span uk-icon="icon: user"></span>
                     {% else %}
-                    <img src="/{{ user.locutor.pic.url }}" />
+                    <img src="{{ user.locutor.pic.url }}" />
                     {% endif %}
                 </div> 
                 <div class="user-menu" uk-drop="mode: click; pos: bottom-right">
