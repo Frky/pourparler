@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 
+import os
 import datetime
 from random import choice
 import string
@@ -104,7 +105,9 @@ def speech(req, sid):
         speech.save()
     if "audio" in req.FILES.keys():
         random_audio_name = "".join([choice(string.ascii_letters) for i in xrange(32)])
-        req.FILES["audio"].name = random_audio_name
+        # Get extension
+        ext = os.path.splitext(req.FILES["audio"].name)[-1]
+        req.FILES["audio"].name = random_audio_name + ext
         audioform = AudioUploadForm(req.POST, req.FILES)
         if audioform.is_valid():
             speech.audio = audioform.cleaned_data['audio']
