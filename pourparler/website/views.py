@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 
 import datetime
+from random import choice
+import string
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -101,6 +103,8 @@ def speech(req, sid):
         speech.text = req.POST["speech-text"]
         speech.save()
     if "audio" in req.FILES.keys():
+        random_audio_name = "".join([choice(string.ascii_letters) for i in xrange(32)])
+        req.FILES["audio"].name = random_audio_name
         audioform = AudioUploadForm(req.POST, req.FILES)
         if audioform.is_valid():
             speech.audio = audioform.cleaned_data['audio']

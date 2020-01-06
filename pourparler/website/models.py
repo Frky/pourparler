@@ -73,7 +73,7 @@ class Speech(RandomPrimaryIdModel):
     # PDF/File of the speech
     # XXX
     # Audio recording of the speech
-    audio = models.FileField(blank=True, null=True)
+    audio = models.FileField(upload_to="audio", blank=True, null=True)
     # When the speech has been added
     date = models.DateTimeField(auto_now_add=True)
 
