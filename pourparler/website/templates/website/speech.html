@@ -21,7 +21,7 @@
 
 {% if speech.audio %}
     <div class="uk-margin">
-        <span class="uk-text"><a href="{{ speech.audio.url }}">Télécharger l'audio</a></span>
+        <span class="uk-text"><a href="/{{ speech.audio.url }}">Télécharger l'audio</a></span>
     </div>
 {% elif user == speech.speaker.user %}
 	<div class="file-upload uk-placeholder uk-text-center">
