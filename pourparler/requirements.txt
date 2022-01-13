@@ -1,4 +1,4 @@
 Django==1.11.23
 olefile==0.44
-Pillow==6.2.0
+Pillow==9.0.0
 wheel==0.24.0
